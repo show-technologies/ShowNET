@@ -52,6 +52,8 @@ ShowNET is a series of flows and nodes within Node-RED that extend the functiona
    * Go to File>Workspace Settings>Network
    * We will make a new network patch for Node-RED. Create a new network patch or modify Patch 1. Give the patch a descriptive name (Like Node-RED or Show Control), set type to "OSC Message," network to UDP, interface to Automatic, and destination to your Node-Red I.P. address and port number (Note: if you are running Node-RED on this computer, instead of an I.P. address you will enter "localhost").
 
+<img width="1009" alt="Screenshot 2024-08-28 at 5 06 04 PM" src="https://github.com/user-attachments/assets/e40a6f45-e113-4f67-815b-4b537d9fb5a3">
+
 ### Configuring Node-RED
    * Run Node-RED and navigate to the flow using the instructions above. If this is the first time you have run it on this computer, the Flows panels will be empty.
    * Drag a "udp in" node into your flow. A red arrow will appear on it, which indicates that it is not configured. Double click into the node and set its port to the port assigned above. Give the node a descriptive name and press done. This node is the input for all messages from QLab on this IP address at this port. It is possible to configure multiple UDP in nodes if you wish to divide up your patch.
