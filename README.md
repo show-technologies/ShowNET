@@ -79,6 +79,7 @@ The OSC node intelligently combines or separates a Node-RED message topic and pa
    * Create a "switch" node. Give the node a descriptive name like "Device Switcher." Set property to "msg.payload." Add outputs for each device that you are routing to. Add output for each device. Set each output to "contains," "string," and the device name section of the OSC address for each device.
      
 ![image](https://github.com/user-attachments/assets/26da1d01-89e9-4c29-859f-56290941b3db)
+
    *Wire each device's udp out node to the corresponding switch output.
 
 ![image](https://github.com/user-attachments/assets/3cacf057-13f0-46b0-8a24-e70c840a0b90)
