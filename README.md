@@ -26,6 +26,7 @@ ShowNET is a series of flows and nodes within Node-RED that extend the functiona
      * On Windows, enter "Command Prompt" or "cmd" in the Windows search bar and run the program Command Prompt.
      * On linux, find the terminal program or press "Control + Alt + t".
    * Enter "node-red" in the terminal. You should see the terminal start to fill with text like this:
+     
 ![image](https://github.com/user-attachments/assets/1c0962db-d3db-44a4-8d60-c86382b05348)
    * Open a web browser and navigate to "localhost:1880" to access the flow editing window.
    * Users running Node-RED connected to the internet should read through this article on securing Node-RED: https://nodered.org/docs/user-guide/runtime/securing-node-red
@@ -38,6 +39,7 @@ ShowNET is a series of flows and nodes within Node-RED that extend the functiona
    * The first step to setting up a LAN is to determine a subnet and subnet mask to operate on. This will determine the IPv4 addresses that your show control computers and Show Technologies devices will use. The subnet mask determines how many numbers in the I.P. addresses have to match. The subnet 255.255.0.0 needs the first two numbers in every I.P. address to match. Good practice is to use private addresses like 10.x.x.x or 192.168.x.x.
    * Write out a list of the computers and devices (including Show Technologies devices) on your show control network and give them I.P. addresses, ensuring none match and none are in use on other computers on the network.
    * Each computer will need one or more ports to communicate over. Ports can be any number between 1 and 65335, but some are dedicated use ports--make sure not to use those. Add the ports you select to your list. A spreadsheet makes keeping track of this information easy:
+     
 ![image](https://github.com/user-attachments/assets/ce88957d-4021-42a3-abaa-965502aefa2e)
 
    * Choose how you will connect each computer to the network (Show Technologies devices are tested on wired Ethernet networks, so that is what we recommend). Configure each device's network adaptor with a static I.P. address matching the one you've written down.
@@ -53,10 +55,12 @@ ShowNET is a series of flows and nodes within Node-RED that extend the functiona
 ### Configuring Node-RED
    * Run Node-RED and navigate to the flow using the instructions above. If this is the first time you have run it on this computer, the Flows panels will be empty.
    * Drag a "udp in" node into your flow. A red arrow will appear on it, which indicates that it is not configured. Double click into the node and set its port to the port assigned above. Give the node a descriptive name and press done. This node is the input for all messages from QLab on this IP address at this port. It is possible to configure multiple UDP in nodes if you wish to divide up your patch.
+     
      ![image](https://github.com/user-attachments/assets/55ceb786-41ea-4356-9d7e-00e63c6aba8f)
   
 ### Testing Your Patch
    * At this point it is a good idea to make sure your programs can communicate. Add two more nodes to your Node-RED flow: OSC and debug. Configure your debug node to display "msg.topic." On the right hand side of the Node-RED editor window, navigate to the debug pane (indicated with an insect icon).
+     
    ![image](https://github.com/user-attachments/assets/feb77bc8-9b35-4bad-a045-40af1a5f896d)
 
    * Create a network cue in QLab with an address like "/test." Assign it to your Node-RED patch, and press GO. You should see "/test" appear in your Node-RED Debug window.
@@ -70,10 +74,13 @@ ShowNET is a series of flows and nodes within Node-RED that extend the functiona
 The OSC node intelligently combines or separates a Node-RED message topic and payload into an OSC message, where the topic is equivalent to the address and the payload is the argument. We want our messages to be packaged as a single buffer. QLab (and other control programs) configures OSC messages as the single buffer, so an OSC node will unpackage it into a topic and payload, which will not work. For this reason, best practice is to either wire the UDP in directly to a UDP out, OR to add two OSC nodes in line, so that the message is unpackaged and repackaged. Indeed, when using some softwares, for example TouchOSC, the double OSC node is preferred.
 ![image](https://github.com/user-attachments/assets/b8ab9dd9-109c-4277-937b-3790d6a4c0c7)
 </details>
+
    * To route between multiple Show Technologies devices, create a "udp out" node for each, following the instructions above.
    * Create a "switch" node. Give the node a descriptive name like "Device Switcher." Set property to "msg.payload." Add outputs for each device that you are routing to. Add output for each device. Set each output to "contains," "string," and the device name section of the OSC address for each device.
+     
 ![image](https://github.com/user-attachments/assets/26da1d01-89e9-4c29-859f-56290941b3db)
    *Wire each device's udp out node to the corresponding switch output.
+
 ![image](https://github.com/user-attachments/assets/3cacf057-13f0-46b0-8a24-e70c840a0b90)
 
 ### Writing Cues for Node-RED Devices
