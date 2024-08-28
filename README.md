@@ -70,6 +70,7 @@ ShowNET is a series of flows and nodes within Node-RED that extend the functiona
 The OSC node intelligently combines or separates a Node-RED message topic and payload into an OSC message, where the topic is equivalent to the address and the payload is the argument. We want our messages to be packaged as a single buffer. QLab (and other control programs) configures OSC messages as the single buffer, so an OSC node will unpackage it into a topic and payload, which will not work. For this reason, best practice is to either wire the UDP in directly to a UDP out, OR to add two OSC nodes in line, so that the message is unpackaged and repackaged. Indeed, when using some softwares, for example TouchOSC, the double OSC node is preferred.
 ![image](https://github.com/user-attachments/assets/b8ab9dd9-109c-4277-937b-3790d6a4c0c7)
 </details>
+
    * To route between multiple Show Technologies devices, create a "udp out" node for each, following the instructions above.
    * Create a "switch" node. Give the node a descriptive name like "Device Switcher." Set property to "msg.payload." Add outputs for each device that you are routing to. Add output for each device. Set each output to "contains," "string," and the device name section of the OSC address for each device.
 ![image](https://github.com/user-attachments/assets/26da1d01-89e9-4c29-859f-56290941b3db)
